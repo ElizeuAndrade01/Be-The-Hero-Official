@@ -31,7 +31,7 @@ module.exports = {
 
 
   async store(req, res) {
-    const { name, email, whatsapp, city, uf } = req.body;
+    const { name, email, password, whatsapp, city, uf } = req.body;
 
     const id = generateUniqueID();
 
@@ -39,6 +39,7 @@ module.exports = {
       id,
       name,
       email,
+      password,
       whatsapp,
       city,
       uf

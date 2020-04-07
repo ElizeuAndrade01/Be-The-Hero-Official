@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { View, FlatList, Image, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
 import logoImg from '../../assets/logo.png';
 import api from '../../services/api';
 import styles from './styles';
@@ -28,7 +27,7 @@ export default function Incidents(){
             return;
         }
 
-        if(total>0 && incidents.length === total){
+        if(total > 0 && incidents.length === total){
             return;
         }
 
@@ -65,7 +64,7 @@ export default function Incidents(){
                 style={styles.incidentList}
                 keyExtractor={incident => String(incident.id)}
                 onEndReached={loadIncidents}
-                onEndReachedThreshold={0.2}
+                onEndReachedThreshold={0.5}
                 showsVerticalScrollIndicator = {false}
                 renderItem={({ item: incident })=>(
                     <View style={styles.incident}>

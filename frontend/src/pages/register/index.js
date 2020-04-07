@@ -14,30 +14,37 @@ export default function Register(){
 
     const[name, setName] = useState();
     const[email, setEmail] = useState();
+    const[password, setPassword] = useState();
+    const[confirmPassword, setConfirmPassword] = useState();
     const[whatsapp, setWhatsapp] = useState();
     const[city, setCity] = useState();
     const[uf, setUf] = useState();
 
     const history = useHistory();
-
+    
     async function handleRegister(e){
         e.preventDefault();
 
         const data = {
             name,
             email,
+            password,
             whatsapp,
             city,
             uf,
         };
-    
-        try{
-            const response = await api.post('ongs', data);
+        
+        if(confirmPassword !== password){
+            alert('O campo Senha e Confirmar senha não são compatíveis, verifique e tente novamente');
+        }else{
+            try{
+                const response = await api.post('ongs', data);
 
-            alert(`Seu ID de acesso: ${response.data.id}`);
-            history.push('/');
-        }catch(err){
-            alert('Erro no cadastro, tente novamente.');
+                alert(`Seu ID de acesso: ${response.data.id}`);
+                history.push('/');
+            }catch(err){
+                alert('Erro no cadastro, tente novamente.');
+            }
         }
     }
    
@@ -65,6 +72,16 @@ export default function Register(){
                 type="email" placeholder="E-mail"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
+                    />
+                <input 
+                type="password" placeholder="Password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    />
+                <input 
+                type="password" placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={e => setConfirmPassword(e.target.value)}
                     />
                 <input 
                     placeholder="Whatsapp"
